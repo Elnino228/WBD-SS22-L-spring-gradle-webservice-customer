@@ -9,11 +9,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
@@ -21,6 +18,14 @@ public class CustomerController {
 
     @Autowired
     private CustomerService customerService;
+
+    @GetMapping("/customers1")
+    public ModelAndView list(){
+        ModelAndView modelAndView=new ModelAndView("list");
+        List<Customer> customers=customerService.findAll();
+        modelAndView.addObject("customers",customers);
+        return modelAndView;
+    }
 
     //-------------------Retrieve All Customers--------------------------------------------------------
 
